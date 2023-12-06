@@ -36,8 +36,13 @@ export default function createContext(defaultValue) {
 
   const Provider = ProviderComponent.extend({
     _providerId: providerId,
-
-    value: computed(function() { return defaultValue; }),
+    _value: null,
+    get value() {
+      return this._value || defaultValue;
+    },
+    set value(val) {
+      this._value = val;
+    },
   });
 
   const ConsumerMixin = Mixin.create({
